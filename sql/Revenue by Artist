@@ -1,0 +1,16 @@
+-- =====================================================
+-- VIEW: vw_revenue_by_artist
+-- PURPOSE: Artist revenue based on invoice line items.
+-- USED IN: Product Performance (artist revenue visual)
+-- GRAIN: One row per artist
+-- NOTE: Keep Top 10 in Power BI (recommended), not in the view.
+-- =====================================================
+CREATE OR REPLACE VIEW vw_revenue_by_artist AS
+SELECT 
+  ar.name AS artist,
+  SUM(il.unit_price * il.quantity) AS revenue
+FROM invoice_line il
+JOIN track t  ON il.track_id = t.track_id
+JOIN album al ON t.album_id = al.album_id
+JOIN artist ar ON al.artist_id = ar.artist_id
+GROUP BY ar.name;
