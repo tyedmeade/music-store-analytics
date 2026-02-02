@@ -1,0 +1,17 @@
+-- =====================================================
+-- VIEW: vw_revenuepct_by_genre
+-- PURPOSE: Percent contribution of each genre to total revenue.
+-- USED IN: Product Performance (% contribution chart)
+-- GRAIN: One row per genre
+-- SKILL: Window function for percent-of-total metric
+-- =====================================================
+CREATE OR REPLACE VIEW vw_revenuepct_by_genre AS
+SELECT
+  g.name AS genre,
+  SUM(il.unit_price * il.quantity) AS genre_revenue,
+  SUM(il.unit_price * il.quantity)
+    / NULLIF(SUM(SUM(il.unit_price * il.quantity)) OVER (), 0) AS revenue_pct
+FROM invoice_line il
+JOIN track t ON il.track_id = t.track_id
+JOIN genre g ON t.genre_id = g.genre_id
+GROUP BY g.name;
