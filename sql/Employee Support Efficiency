@@ -1,0 +1,19 @@
+-- =====================================================
+-- VIEW: vw_employee_support_efficiency
+-- PURPOSE: Support rep performance including efficiency (revenue per customer).
+-- USED IN: Operations Performance (employee comparison)
+-- GRAIN: One row per employee
+-- =====================================================
+CREATE OR REPLACE VIEW vw_employee_support_efficiency AS
+SELECT
+  e.employee_id,
+  CONCAT(e.first_name, ' ', e.last_name) AS employee_name,
+  COUNT(DISTINCT c.customer_id) AS customers_supported,
+  SUM(i.total) AS total_support_revenue,
+  SUM(i.total) / NULLIF(COUNT(DISTINCT c.customer_id), 0) AS revenue_per_customer
+FROM employee e
+JOIN customer c 
+  ON e.employee_id = c.support_rep_id
+JOIN invoice i 
+  ON c.customer_id = i.customer_id
+GROUP BY e.employee_id, e.first_name, e.last_name;
