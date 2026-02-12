@@ -1,1 +1,22 @@
+## Data Dictionary (Chinook)
+
+### Core Fact Tables
+- **invoice**: one row per invoice (customer purchase). Contains invoice_date, billing_country, total.
+- **invoice_line**: line-level purchases (track_id, unit_price, quantity).
+
+### Key Dimensions
+- **customer**: customer demographics + support_rep_id
+- **employee**: support reps and hierarchy
+- **track**: product catalog (links to album, genre, media_type)
+- **album → artist**: artist attribution
+- **genre**: music genre categories
+- **playlist / playlist_track**: playlist membership (engagement proxy)
+
+### Key Relationships
+- invoice.customer_id → customer.customer_id
+- invoice_line.invoice_id → invoice.invoice_id
+- invoice_line.track_id → track.track_id
+- track.album_id → album.album_id → artist.artist_id
+- track.genre_id → genre.genre_id
+- customer.support_rep_id → employee.employee_id
 
