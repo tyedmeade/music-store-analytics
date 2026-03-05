@@ -1,4 +1,7 @@
 # music-store-analytics
+
+![Dashboard Preview](screenshots/01_performance_overview.png)
+
 SQL-modeled analytics project visualized in Power BI, analyzing revenue trends, customer behavior, product performance, and operations.
 
 ## Overview
