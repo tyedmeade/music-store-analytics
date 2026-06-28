@@ -1,38 +1,73 @@
-# music-store-analytics
+# Music Store Analytics (SQL + Power BI)
 
-![Dashboard Preview](screenshots/01_performance_overview.png)
+This project analyzes a digital music store database using PostgreSQL and Power BI to evaluate revenue trends, customer value, product performance, and support operations.
 
-SQL-modeled analytics project visualized in Power BI, analyzing revenue trends, customer behavior, product performance, and operations.
+The analysis connects sales outcomes to the business processes that drive them, including customer purchases, invoice line items, product catalog performance, geographic revenue concentration, and employee-supported customer revenue.
 
-## Overview
-This project analyzes a digital music store database to evaluate revenue performance, customer behavior, and product trends using SQL and Power BI.
+## Dashboard Preview
 
-The analysis is built using PostgreSQL for data modeling and Power BI for interactive dashboards designed for executive and operational use.
+![Performance Overview](screenshots/01_performance_overview.png)
 
 ## Business Questions
-- Which products and genres drive the most revenue?
-- How does revenue trend over time?
-- Who are the highest-value customers?
-- How does performance vary by country?
 
-## Data & SQL Modeling
-The data model was built using normalized relational tables and transformed into reporting views using PostgreSQL.
+- How does total revenue trend over time?
+- Which countries generate the most revenue?
+- Which customers contribute the most lifetime value?
+- Which artists, tracks, and genres drive revenue performance?
+- How does support employee performance compare by revenue and customer coverage?
 
-Key components include:
-- Fact tables for invoices and invoice line items
-- Dimension tables for customers, tracks, artists, and genres
-- Reporting views designed to support dashboard metrics and analysis
+## Business Process
 
-## Power BI Dashboard
-The Power BI dashboard visualizes revenue trends, customer performance, and product insights.
+Customer Purchase → Invoice → Invoice Line Item → Track / Album / Artist / Genre → Revenue Reporting → Customer & Product Performance Monitoring
 
-**Pages include:**
-- Revenue Overview – total revenue trends and KPIs
-- Top Customers – lifetime value and purchasing behavior
-- Product Performance – revenue by genre, artist, and track
+## KPI Framework
 
-## Key Insights
-- A small percentage of customers account for a disproportionate share of revenue
-- Certain genres consistently outperform others across regions
-- Revenue trends show seasonal patterns tied to purchasing behavior
+| Business Area | Outcome KPI | Driver KPIs / Segments |
+|---|---|---|
+| Revenue Performance | Total Revenue | Month, Country, Customer Count |
+| Customer Value | Lifetime Value | Customer, Country, Total Lifetime Revenue |
+| Product Performance | Product Revenue | Artist, Track, Genre, Revenue Contribution % |
+| Operations Performance | Support Revenue | Support Rep, Revenue per Employee, Revenue per Supported Customer |
 
+## SQL & Modeling Workflow
+
+- Used the Chinook relational database as the source model.
+- Joined customer, invoice, invoice line, track, album, artist, genre, and employee tables.
+- Created SQL logic to calculate revenue trends, customer lifetime value, product revenue, and employee-supported revenue.
+- Built reporting views to centralize revenue, customer, product, and operations logic.
+- Connected the modeled data to Power BI dashboards for executive and operational analysis.
+
+## Key Findings
+
+- Total revenue was approximately $2.33K across the reporting period.
+- The United States generated the highest revenue among countries.
+- A small group of customers contributed higher lifetime value than the broader customer base.
+- Rock generated the largest share of genre revenue.
+- Top artists and tracks accounted for a meaningful share of product revenue.
+- Support employee revenue contribution was relatively balanced across representatives.
+
+## Tools Used
+
+- PostgreSQL
+- SQL
+- Power BI
+- DAX
+- SQL Views
+- Joins
+- Aggregations
+- Window Functions
+- Customer Lifetime Value Analysis
+- Revenue Analysis
+- Business Intelligence Reporting
+
+## Repository Structure
+
+```text
+sql/
+screenshots/
+README.md
+```
+
+## Full Portfolio Walkthrough
+
+A deeper project walkthrough is available in my Notion portfolio, including the business process, KPI framework, dashboard analysis, SQL implementation, revenue logic, and business insights.
